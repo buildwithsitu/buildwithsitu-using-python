@@ -1,0 +1,6 @@
+print("Hello world")
+bil = float(input('enter bill amount?$:'))
+tip = float(input('enter tip? percentage:'))
+people = int(input('enter number of people:'))
+total = ("{:.2f}".format((bil + (bil * (tip / 100))) / people))
+print('total amount per person: $' + total)
