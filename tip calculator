@@ -4,3 +4,84 @@ tip = float(input('enter tip? percentage:'))
 people = int(input('enter number of people:'))
 total = ("{:.2f}".format((bil + (bil * (tip / 100))) / people))
 print('total amount per person: $' + total)
+
+#new advance tip calculator
+
+print('advance tip calculator')
+while True:
+    print('\n   new calculation   ')
+    try:
+        bill = float(input('enter bill amount?:'))
+    except ValueError:
+        print('please enter a valid amount')
+        continue
+    print('\n how was the service?')
+    print('1. excellent\n2. good\n3. average\n4. poor')
+    service = input('enter service quality (1-4):')
+    if service == '1':
+        tip_percentage = 20
+        service_name = 'excellent'
+    elif service == '2':
+        tip_percentage = 15
+        service_name = 'good'
+    elif service == '3':
+        tip_percentage = 10
+        service_name = 'average'
+    elif service == '4':
+        tip_percentage = 5
+        service_name = 'poor'
+    else:
+        print('invalid service option')
+        continue
+    discount_choice = input('\n do you have a discount?(yes/no): ').lower()
+    if discount_choice == 'yes':
+        try:
+            discount_percentage = float(input('enter discount percentage:'))
+            if discount_percentage < 0 or discount_percentage > 100:
+                print('discount must be between 0 and 100')
+                continue
+        except ValueError:
+            print('please enter a valid discount percentage')
+            continue
+    elif discount_choice == 'no':
+        discount_percentage = 0
+    else:
+        print('please enter yes or no.')
+        continue
+    discount_amount = bill * discount_percentage / 100
+    bill_after_discount = bill - discount_amount
+    tip_amount = bill_after_discount * tip_percentage / 100
+    final_bill = bill_after_discount + tip_amount
+    try:
+        people = int(input('\n how many people will split the bill?:'))
+        if people <= 0:
+            print('number of people must be greater than 0')
+            continue
+    except ValueError:
+        print('enter a whole number')
+        continue
+    per_person = final_bill / people
+    print('\n========== BILL SUMMARY ==========')
+    print(f'Original bill: ${bill:.2f}')
+    print(f'Service quality: {service_name}')
+    print(f'Tip percentage: {tip_percentage}%')
+    print(f'Tip amount: ${tip_amount:.2f}')
+    print(f'Discount percentage: {discount_percentage}%')
+    print(f'Discount amount: ${discount_amount:.2f}')
+    print(f'Bill after discount: ${bill_after_discount:.2f}')
+    print(f'Final bill (with tip): ${final_bill:.2f}')
+    print(f'Number of people: {people}')
+    print(f'Amount per person: ${per_person:.2f}')
+    print('==================================\n')
+    again = input(
+        "\nDo you want to calculate another bill? (yes/no): "
+    ).lower()
+
+    if again == "no":
+        print("\nThank you for using the Tip Calculator!")
+        break
+
+    elif again != "yes":
+        print("\n Invalid choice. Program ending.")
+        break
+
